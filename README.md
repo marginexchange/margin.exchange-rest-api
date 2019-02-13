@@ -330,3 +330,26 @@ while ((length(signature) % 4) != 0) {
   "MESSAGE": "OK"
 }
 ```
+
+## New order
+### GET /v1/private/new_order
+Parameter | Required | Description
+----------| -----------
+MARKET | Yes| Market ID  (ex: BTCUSD, LTCUSD ...)
+TYPE | Yes | "BUY" or "SELL"
+ORDER_TYPE | Yes | "market" or "limit" or "stop" or "conditional"
+QTY | YES | Order qty. Precision should be same as currency precision.
+PRICE | YES | Order price. (stop/conditional trigger price stop/conditional orders) Precision should be same as currency precision.
+EXCHANGE_TYPE | No | "exchange" or "margin". default is "exchange"
+HIDDEN | No | "1" or "0". Default is "0"
+POST_ONLY | No | "1" or "0". Default is "0". "1" = will cancel order if it is going to execute immidiately
+NOTE | No | Order note. will be available only to you.
+STOP_TYPE | required for ORDER_TYPE="stop" | "market" or "limit"
+STOP_LIMIT_PRICE | required for ORDER_TYPE="stop" and STOP_TYPE="limit" | Price for limit order to appear once stop order is triggered
+CONDITIONAL_TYPE | required for ORDER_TYPE="conditional" | "market" or "limit"
+CONDITIONAL_LIMIT_PRICE | required for ORDER_TYPE="conditional" and CONDITIONAL_TYPE="limit" | Price for limit order to appear once conditional orer is triggered
+
+**difference beween "stop" and "conditional" orders:**
+STOP BUY order can have price only lower than current market price.
+STOP SELL order can have price only higer than current market price.
+CCONDITIONAL orders can have any price and will be triggered once current price crosses conditional price.
