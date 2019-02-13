@@ -236,3 +236,97 @@ while ((length(signature) % 4) != 0) {
  signature = signature + '=' 
 }
 ```
+
+## Get Balance
+### GET /v1/private/balances
+
+```javascript
+{
+  "DATA": [
+    {
+      "CURRENCY_ID": "BAB",
+      "CURRENCY_TICKER": "BAB",
+      "CURRENCY_NAME": "Bitcoin ABC"
+      "MARGIN": {
+        "TOTAL": 0,
+        "LOCKED": 0,
+        "PENDING": 0,
+        "AVAIL": 0
+      },      
+      "EXCHANGE": {
+        "AVAIL": "3.38",
+        "PENDING": "0",
+        "LOCKED": "0",
+        "TOTAL": "3.38""
+      },
+      "FUNDING": {
+        "PENDING": 0,
+        "AVAIL": 0,
+        "LOCKED": 0,
+        "TOTAL": 0
+      }
+    },
+    {
+      "CURRENCY_ID": "USD",
+      "CURRENCY_TICKER": "USD",
+      "CURRENCY_NAME": "USD",
+      "EXCHANGE": {
+        "AVAIL": "230.6",
+        "PENDING": "0",
+        "TOTAL": "233",
+        "LOCKED": "3.6"
+      },      
+      "MARGIN": {
+        "AVAIL": 0,
+        "PENDING": 0,
+        "TOTAL": 0,
+        "LOCKED": 0
+      },
+      "FUNDING": {
+        "TOTAL": 0,
+        "LOCKED": 0,
+        "PENDING": 0,
+        "AVAIL": 0
+      }
+    },
+    ...
+  ],
+  "RESULT": 1,
+  "MESSAGE": "OK"
+}
+```
+
+## Get Balance for specific currency
+### GET /v1/private/balance/`currency_ID`
+
+`GET /v1/private/balance/USD`
+
+```javascript
+{
+  "DATA": {
+     "CURRENCY_ID": "USD",
+     "CURRENCY_TICKER": "USD",
+     "CURRENCY_NAME": "USD",
+     "EXCHANGE": {
+       "AVAIL": "230.6",
+       "PENDING": "0",
+       "TOTAL": "233",
+       "LOCKED": "3.6"
+     },      
+     "MARGIN": {
+       "AVAIL": 0,
+       "PENDING": 0,
+       "TOTAL": 0,
+       "LOCKED": 0
+     },
+     "FUNDING": {
+       "TOTAL": 0,
+       "LOCKED": 0,
+       "PENDING": 0,
+       "AVAIL": 0
+     }
+   },
+  "RESULT": 1,
+  "MESSAGE": "OK"
+}
+```
