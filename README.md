@@ -338,14 +338,15 @@ Parameter | Required | Description
 MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
 TYPE | Yes | "BUY" or "SELL"
 ORDER_TYPE | Yes | "market" or "limit" or "stop" or "conditional"
-QTY | Yes | Order qty. Precision should be same as currency precision.
-PRICE | Yes | Order price. (stop/conditional trigger price stop/conditional orders) Precision should be same as currency precision.
+QTY | Yes | Order qty. General Precision Rules apply.
+PRICE | Yes | Order price. (stop/conditional trigger price stop/conditional orders) General Precision Rules apply.
 EXCHANGE_TYPE | No | "exchange" or "margin". default is "exchange"
 HIDDEN | No | "1" or "0". Default is "0"
 POST_ONLY | No | "1" or "0". Default is "0". "1" = will cancel order if it is going to execute immidiately
 NOTE | No | Order note. will be available only to you.
-STOP_TYPE | required for ORDER_TYPE="stop" | "market" or "limit"
+STOP_TYPE | required for ORDER_TYPE="stop" | "market" or "limit" or "trailing"
 STOP_LIMIT_PRICE | required for ORDER_TYPE="stop" and STOP_TYPE="limit" | Price for limit order to appear once stop order is triggered
+STOP_TRAILING_DISTANCE | required for ORDER_TYPE="stop" and STOP_TYPE="trailing" | Distance Price. General Precision Rules apply.
 CONDITIONAL_TYPE | required for ORDER_TYPE="conditional" | "market" or "limit"
 CONDITIONAL_LIMIT_PRICE | required for ORDER_TYPE="conditional" and CONDITIONAL_TYPE="limit" | Price for limit order to appear once conditional orer is triggered
 
