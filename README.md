@@ -359,3 +359,14 @@ TIME_IN_FORCE | No | Time when order will be auto cancelled. format "YYYY-MM-DD 
  - STOP BUY order can have price only lower than current market price.
  - STOP SELL order can have price only higer than current market price.
  - CONDITIONAL orders can have any price and will be triggered once current price crosses conditional price.
+
+
+## Update order
+### GET /v1/private/update_order
+
+Parameter | Required | Description
+----------- | ----------- | -----------
+MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
+ID | Yes | Order ID
+all other as in `new_order` | No | Send only parameters you want to change
+
