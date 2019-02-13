@@ -343,12 +343,17 @@ PRICE | Yes | Order price. (stop/conditional trigger price stop/conditional orde
 EXCHANGE_TYPE | No | "exchange" or "margin". default is "exchange"
 HIDDEN | No | "1" or "0". Default is "0"
 POST_ONLY | No | "1" or "0". Default is "0". "1" = will cancel order if it is going to execute immidiately
+REDUCE_ONLY | No, used when EXCHANGE_TYPE='margin' | "1" or "0". Default is "0". "1" = will cancel order if it is going to increase current margin position size
 NOTE | No | Order note. will be available only to you.
 STOP_TYPE | required for ORDER_TYPE="stop" | "market" or "limit" or "trailing"
 STOP_LIMIT_PRICE | required for ORDER_TYPE="stop" and STOP_TYPE="limit" | Price for limit order to appear once stop order is triggered
 STOP_TRAILING_DISTANCE | required for ORDER_TYPE="stop" and STOP_TYPE="trailing" | Distance Price. General Precision Rules apply.
 CONDITIONAL_TYPE | required for ORDER_TYPE="conditional" | "market" or "limit"
 CONDITIONAL_LIMIT_PRICE | required for ORDER_TYPE="conditional" and CONDITIONAL_TYPE="limit" | Price for limit order to appear once conditional orer is triggered
+MARGIN_LEVERAGE | No, used when EXCHANGE_TYPE='margin' | float: from 1 to MARKET_MAX_LEVERAGE. default=MARKET_MAX_LEVERAGE
+MARGIN_GROUP | No, used when EXCHANGE_TYPE='margin' | "0" or "1" or "2". default=0
+TIME_IN_FORCE | No | Time whe order will be auto cancelled. foramt is "YYY-MM-DD HH:mm:ss" (UTC). should be valid future time is supplied.
+
 
 ### **difference beween "stop" and "conditional" orders:**
  - STOP BUY order can have price only lower than current market price.
