@@ -120,3 +120,79 @@ Failed:
 }
 ```
 
+## Get market order book
+### GET /v1/public/orders/`market_id`
+
+**Parameters:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+limit | INT | NO | Default 10; max 1000.
+
+`GET /v1/public/orders/BTCUSD?limit=2`
+```javascript
+{
+  "DATA": {
+    "BUY": [
+      {
+        "PRICE": 3678.5,
+        "QTY": 6.0836145,
+        "COUNT": 2        
+      },
+      {
+        "PRICE": 3678.4,
+        "QTY": 2.06334167,        
+        "COUNT": 3
+      }
+    ],
+    "SELL": [
+      {
+        "PRICE": 3678.8,
+        "QTY": 5.33834515,
+        "COUNT": 2
+      },
+      {
+        "PRICE": 3678.9,
+        "QTY": 0.84328958,
+        "COUNT": 3
+      }
+    ]
+  },
+  "RESULT": 1,
+  "MESSAGE": "OK"
+}
+```
+
+
+## Get market order book history
+### GET /v1/public/orders_history/`market_id`
+
+**Parameters:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+limit | INT | NO | Default 10; max 100.
+
+`GET /v1/public/orders_hisotry/BTCUSD?limit=2`
+```javascript
+{
+  "DATA": [
+    {
+      "TYPE": "SELL",
+      "PRICE": 3678.5,
+      "QTY": 0.00963449,
+      "TOTAL": 35.44047146,      
+      "DT": "2019-02-13 13:22:00"      
+    },
+    {
+      "TYPE": "SELL",
+      "PRICE": 3678.5,
+      "QTY": 0.0056712,
+      "TOTAL": 20.8615092,
+      "DT": "2019-02-13 13:21:51"
+    }
+  ],
+  "RESULT": 1,
+  "MESSAGE": "OK"
+}
+```
