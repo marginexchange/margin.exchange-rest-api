@@ -370,7 +370,7 @@ MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
 ID | Yes | Order ID
 QTY | Yes | Order qty. General Precision Rules apply.
 PRICE | Yes | Order price. General Precision Rules apply.
-all other as in `new_order` | No | Send only parameters you want to change
+all other as in `new_order` except TYPE and ORDER_TYPE | No | Send only parameters you want to change
 
 
 ## Cancel order
