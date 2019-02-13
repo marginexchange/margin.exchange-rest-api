@@ -350,7 +350,7 @@ STOP_TRAILING_DISTANCE | required for ORDER_TYPE="stop" and STOP_TYPE="trailing"
 CONDITIONAL_TYPE | required for ORDER_TYPE="conditional" | "market" or "limit"
 CONDITIONAL_LIMIT_PRICE | required for ORDER_TYPE="conditional" and CONDITIONAL_TYPE="limit" | Price for limit order to appear once conditional orer is triggered
 
-# **difference beween "stop" and "conditional" orders:**
+### **difference beween "stop" and "conditional" orders:**
  - STOP BUY order can have price only lower than current market price.
  - STOP SELL order can have price only higer than current market price.
- - CCONDITIONAL orders can have any price and will be triggered once current price crosses conditional price.
+ - CONDITIONAL orders can have any price and will be triggered once current price crosses conditional price.
