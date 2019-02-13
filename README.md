@@ -257,7 +257,7 @@ while ((length(signature) % 4) != 0) {
         "AVAIL": "3.38",
         "PENDING": "0",
         "LOCKED": "0",
-        "TOTAL": "3.38""
+        "TOTAL": "3.38"
       },
       "FUNDING": {
         "PENDING": 0,
