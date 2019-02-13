@@ -352,7 +352,7 @@ CONDITIONAL_TYPE | required for ORDER_TYPE="conditional" | "market" or "limit"
 CONDITIONAL_LIMIT_PRICE | required for ORDER_TYPE="conditional" and CONDITIONAL_TYPE="limit" | Price for limit order to appear once conditional order is triggered
 MARGIN_LEVERAGE | No, used when EXCHANGE_TYPE='margin' | float: from 1 to MARKET_MAX_LEVERAGE. default=MARKET_MAX_LEVERAGE
 MARGIN_GROUP | No, used when EXCHANGE_TYPE='margin' | "0" or "1" or "2". default=0
-TIME_IN_FORCE | No | Time when order will be auto cancelled. format "YYYY-MM-DD HH:mm:ss" (UTC). if supplied - should be valid datetime in future.
+TIME_IN_FORCE | No | Time when order will be auto cancelled. format "YYYY-MM-DD HH:mm:ss" (UTC). if supplied - should be valid datetime in future. Can be set to "0" to cancel expiration.
 
 
 ### **difference beween "stop" and "conditional" orders:**
