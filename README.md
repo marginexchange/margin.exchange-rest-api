@@ -212,13 +212,12 @@ X-SIGNATURE | base64(Hmac sha256 of payload using your `Api secret`)
 X-NONCE | Incrementing integer. usually it is `unix time * 1000`
 
 ### How to calculate payload / signature
-```
-payload = REQUEST_METHOD + URL_PATH + POST_DATA + NONCE
-```
+`payload = REQUEST_METHOD + URL_PATH + POST_DATA + NONCE`
 
-Lets make request to as example: /v1/private/cancel_order
-Current NONCE (can be any): 12233342344
-Request body (POST DATA) is {"MARKET":"BTCUSD","ID":12333}
+Lets make request to as example: `/v1/private/cancel_order`
+- Current NONCE (can be any): 12233342344
+- Request body (POST DATA) is {"MARKET":"BTCUSD","ID":12333}
+
 
 PAYLOAD:
 ```
@@ -233,5 +232,7 @@ signature = base64(hmac_sha256(payload, Api secret))
 
 NOTE: length(signature) should be always a multiple of 4. If not add '=' at the end.
 ```
-while ((length(signature) % 4) != 0) { signature = signature + '=' }
+while ((length(signature) % 4) != 0) { 
+ signature = signature + '=' 
+}
 ```
