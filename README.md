@@ -368,5 +368,16 @@ Parameter | Required | Description
 ----------- | ----------- | -----------
 MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
 ID | Yes | Order ID
+QTY | Yes | Order qty. General Precision Rules apply.
+PRICE | Yes | Order price. General Precision Rules apply.
 all other as in `new_order` | No | Send only parameters you want to change
+
+
+## Cancel order
+### GET /v1/private/cancel_order
+
+Parameter | Required | Description
+----------- | ----------- | -----------
+MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
+ID | Yes | Order ID
 
