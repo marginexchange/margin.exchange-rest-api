@@ -1,7 +1,8 @@
 # Public Rest API for **https://margin.exchange**
 
  The base endpoint is: **https://api.margin.exchange**
-* All endpoints return a JSON object.
+* All requests to API return a JSON object.
+* All requests to API expects JSON object as parameters.
 * All requests to API should have HTTP status `200`
 * All responces have basic structure like this:
 
@@ -195,4 +196,42 @@ limit | INT | NO | Default 10; max 100.
   "RESULT": 1,
   "MESSAGE": "OK"
 }
+```
+
+
+# PRIVATE requests
+* Each private request should send additional information to identify user
+* Before you start - you should make `Api key` / `Api secret` pair using main web site.
+* List of required headers:
+
+Header | Description
+--------- | ---------
+X-APIKEY | `Api key` as is
+X-PAYLOAD | base64(request data)
+X-SIGNATURE | base64(Hmac sha256 of payload using your `Api secret`)
+X-NONCE | Incrementing integer. usually it is `unix time * 1000`
+
+### How to calculate payload / signature
+```
+payload = REQUEST_METHOD + URL_PATH + POST_DATA + NONCE
+```
+
+Lets make request to as example: /v1/private/cancel_order
+Current NONCE (can be any): 12233342344
+Request body (POST DATA) is {"MARKET":"BTCUSD","ID":12333}
+
+PAYLOAD:
+```
+payload = "POST" + "/v1/private/cancel_order" + "{"MARKET":"BTCUSD","ID":12333}" + "12233342344"
+payload = encode_base64(payload)
+````
+
+SIGNATURE:
+```
+signature = base64(hmac_sha256(payload, Api secret))
+```
+
+NOTE: length(signature) should be always a multiple of 4. If not add '=' at the end.
+```
+while ((length(signature) % 4) != 0) { signature = signature + '=' }
 ```
