@@ -81,3 +81,42 @@ Failed:
 
 ## Get Tickers
 ### GET /v1/public/tickers
+
+```javascript
+{
+  "DATA": [
+    {
+      "MARKET": "BTCUSD",
+      "SELL": 3678.8,      
+      "BUY": 3678.5,
+      "LAST": 3678.5
+    },
+    {
+      "MARKET": "LTCUSD",
+      "SELL": 43.39,
+      "BUY": 43.36,
+      "LAST": 43.36      
+    },
+    ...
+  ],
+  "RESULT": 1,
+  "MESSAGE": "OK"
+}
+```
+
+## Get Ticker for specific market
+### GET /v1/public/ticker/`market_id`
+
+```javascript
+{
+  "DATA": {
+    "MARKET": "BTCUSD",
+    "SELL": 3678.8,      
+    "BUY": 3678.5,
+    "LAST": 3678.5
+   },
+  "RESULT": 1,
+  "MESSAGE": "OK"
+}
+```
+
