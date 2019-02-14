@@ -383,6 +383,10 @@ ID | Yes | Order ID
 
 
 ## List open orders
-### GET /v1/private/list_open_orders
-### GET /v1/private/list_open_orders/`market_id`
+### POST /v1/private/list_open_orders
+
+Parameter | Required | Description
+----------- | ----------- | -----------
+MARKET | No | Market ID  (ex: BTCUSD, LTCUSD ...)
+
 
