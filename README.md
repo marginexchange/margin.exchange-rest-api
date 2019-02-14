@@ -360,6 +360,13 @@ TIME_IN_FORCE | No | Time when order will be auto cancelled. format "YYYY-MM-DD 
  - STOP SELL order can have price only higer than current market price.
  - CONDITIONAL orders can have any price and will be triggered once current price crosses conditional price.
 
+### **What is MARGIN_GROUP**
+You can have up to 3 positions open on same market.
+You can have LONG (BUY) or SHORT (SELL) positions open smae time in different margin groups.
+Each margin order can have MARGIN_GROUP parameter to identify in what group margin position will be created/modified.
+
+
+### New order result reply:
 ```javascript
 {
  "DATA": {
@@ -498,7 +505,7 @@ MARKET | No | Market ID  (ex: BTCUSD, LTCUSD ...)
 Parameter | Required | Description
 ----------- | ----------- | -----------
 MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
-LIMIT | No | Number of orders to returs (sorted by execution/cancellation time DESC). Default is 10. Max 100
+LIMIT | No | Number of orders to return (sorted by execution/cancellation time DESC). Default is 10. Max 100
 
 ```javascript
 {
@@ -507,7 +514,7 @@ LIMIT | No | Number of orders to returs (sorted by execution/cancellation time D
 		  "MARKET" : "BTCUSD",
 		  "ID" : 1014324,
 		  "DT" : "2019-02-14 11:39:33",
-		  "END_DT" : "2019-02-14 11:39:33'
+		  "END_DT" : "2019-02-14 11:39:33",
 		  "TYPE" : "BUY",
 		  "ORDER_TYPE" : "market",
 		  "PRICE" : "3651.8",
@@ -540,6 +547,58 @@ LIMIT | No | Number of orders to returs (sorted by execution/cancellation time D
 	],
   "RESULT": 1,
   "MESSAGE": "OK"
+}
+```
+
+## List margin positions
+### POST /v1/private/list_margin_positions
+
+Parameter | Required | Description
+----------- | ----------- | -----------
+MARKET | No | Market ID  (ex: BTCUSD, LTCUSD ...)
+
+```javascript
+{
+	"DATA": [
+	  {
+	    "MARKET": "BTCUSD",
+	    "ID": 3,
+	    "DT": "2019-02-14 12:10:30",
+	    "TYPE": "BUY",
+	    "QTY": "0.1",
+	    "PRICE": "3649.6",
+	    "TOTAL": "364.96",
+	    "MARGIN_LEVERAGE": 3,
+	    "MARGIN_GROUP": 0,
+	    "PL": "0.96",
+			"PL_PERCENT": "0.26",
+			"LIQ_PRICE": "2615.5466667"
+	  }
+	],
+  "RESULT": 1,
+  "MESSAGE": "OK"
+}
+```
+
+
+## Close margin position
+### POST /v1/private/close_margin_position
+
+Parameter | Required | Description
+----------- | ----------- | -----------
+MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
+ID | Yes | Position ID
+
+This action is same as manually make an `opposite market order with same qty`.
+
+```javascript
+{
+  "DATA": {
+    "POSITION_ID": 3,
+    "CLOSE_ORDER_ID": 1025583    
+  },
+  "MESSAGE": "Order Submitted",
+  "RESULT": 1
 }
 ```
 
