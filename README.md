@@ -362,7 +362,7 @@ TIME_IN_FORCE | No | Time when order will be auto cancelled. format "YYYY-MM-DD 
 
 ### **What is MARGIN_GROUP**
 You can have up to 3 positions open on same market.
-You can have LONG (BUY) or SHORT (SELL) positions open smae time in different margin groups.
+You can have LONG (BUY) or SHORT (SELL) positions open same time in different margin groups.
 Each margin order can have MARGIN_GROUP parameter to identify in what group margin position will be created/modified.
 
 
@@ -506,6 +506,7 @@ Parameter | Required | Description
 ----------- | ----------- | -----------
 MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
 LIMIT | No | Number of orders to return (sorted by execution/cancellation time DESC). Default is 10. Max 100
+
 
 ```javascript
 {
