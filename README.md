@@ -382,6 +382,15 @@ QTY | Yes | Order qty. General Precision Rules apply.
 PRICE | Yes | Order price. General Precision Rules apply.
 params from `new_order` except TYPE, ORDER_TYPE, STOP_TYPE and CONDITIONAL_TYPE | No | Send only parameters you want to change
 
+```javascript
+{
+ "DATA" : {
+   'ID': 1013132
+  },
+  "RESULT": 1,
+  "MESSAGE": "OK"
+}
+```
 
 ## Cancel order
 ### POST /v1/private/cancel_order
@@ -410,6 +419,21 @@ MARKET | No | Market ID  (ex: BTCUSD, LTCUSD ...)
 ```javascript
 {
  "DATA" : [
+    {
+      "MARKET" : "BTCUSD",
+      "ID" : 1013120,
+      "DT" : "2019-01-11 02:23:26",
+      "TYPE" : "BUY",
+      "ORDER_TYPE" : "limit",
+      "TOTAL_QTY" : "10.9",
+      "FILLED_QTY" : "0.1",
+      "PENDING_QTY" : "10.8",
+      "PRICE" : "3840.25",
+      "EXCHANGE_TYPE" : "exchange",
+      "TIME_IN_FORCE" : 0,
+      "NOTE" : "",
+      "HIDDEN" : 1
+    },
     {
       "MARKET" : "BTCUSD",
       "ID" : 1013130,
