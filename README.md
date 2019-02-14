@@ -332,7 +332,7 @@ while ((length(signature) % 4) != 0) {
 ```
 
 ## New order
-### GET /v1/private/new_order
+### POST /v1/private/new_order
 Parameter | Required | Description
 ----------- | ----------- | -----------
 MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
@@ -362,7 +362,7 @@ TIME_IN_FORCE | No | Time when order will be auto cancelled. format "YYYY-MM-DD 
 
 
 ## Update order
-### GET /v1/private/update_order
+### POST /v1/private/update_order
 
 Parameter | Required | Description
 ----------- | ----------- | -----------
@@ -374,10 +374,15 @@ params from `new_order` except TYPE, ORDER_TYPE, STOP_TYPE and CONDITIONAL_TYPE 
 
 
 ## Cancel order
-### GET /v1/private/cancel_order
+### POST /v1/private/cancel_order
 
 Parameter | Required | Description
 ----------- | ----------- | -----------
 MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
 ID | Yes | Order ID
+
+
+## List open orders
+### GET /v1/private/list_open_orders
+### GET /v1/private/list_open_orders/`market_id`
 
