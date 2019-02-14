@@ -362,11 +362,11 @@ TIME_IN_FORCE | No | Time when order will be auto cancelled. format "YYYY-MM-DD 
 
 ```javascript
 {
- "DATA" : {
-   'ID': 1013132
+ "DATA": {
+   "ID": 1013132
   },
-  "RESULT": 1,
-  "MESSAGE": "OK"
+ "RESULT": 1,
+ "MESSAGE": "OK"
 }
 ```
 
@@ -384,11 +384,9 @@ params from `new_order` except TYPE, ORDER_TYPE, STOP_TYPE and CONDITIONAL_TYPE 
 
 ```javascript
 {
- "DATA" : {
-   'ID': 1013132
-  },
-  "RESULT": 1,
-  "MESSAGE": "OK"
+ "DATA": {},
+ "RESULT": 1,
+ "MESSAGE": "OK"
 }
 ```
 
