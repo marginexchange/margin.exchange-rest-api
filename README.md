@@ -9,9 +9,9 @@
 Successful:
 ```javascript
 {
- RESULT: 1,
- MESSAGE: 'OK or descriptive text',
- DATA: { ... } or [ ... ]
+ "RESULT": 1,
+ "MESSAGE": "OK or descriptive text",
+ "DATA": { ... } or [ ... ]
 }
 ```
 DATA can be object or array.
@@ -20,8 +20,8 @@ DATA can be object or array.
 Failed:
 ```javascript
 {
- RESULT: 0,
- MESSAGE: 'error message'
+ "RESULT": 0,
+ "MESSAGE": "error message"
 }
 ```
 
