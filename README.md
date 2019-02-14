@@ -491,3 +491,55 @@ MARKET | No | Market ID  (ex: BTCUSD, LTCUSD ...)
   "MESSAGE": "OK"
 }
 ```
+
+## List orders history
+### POST /v1/private/list_closed_orders
+
+Parameter | Required | Description
+----------- | ----------- | -----------
+MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
+LIMIT | No | Number of orders to returs (sorted by execution/cancellation time DESC). Default is 10. Max 100
+
+```javascript
+{
+	"DATA": [
+		{
+		  "MARKET" : "BTCUSD",
+		  "ID" : 1014324,
+		  "DT" : "2019-02-14 11:39:33",
+		  "END_DT" : "2019-02-14 11:39:33'
+		  "TYPE" : "BUY",
+		  "ORDER_TYPE" : "market",
+		  "PRICE" : "3651.8",
+		  "INITIAL_QTY" : "0.1",
+		  "QTY" : "0.1",
+		  "MSG" : "",
+		  "NOTE" : "",
+		  "MARGIN_LEVERAGE" : "3",
+		  "EXCHANGE_TYPE" : "margin",
+		  "MARGIN_GROUP" : 0,
+		  "HIDDEN" : 0
+		},
+		{
+		  "MARKET" : "BTCUSD",
+		  "ID" : 1014231,
+		  "DT" : "2019-02-14 11:39:06",
+		  "END_DT" : "2019-02-14 11:39:28",
+		  "TYPE" : "BUY",
+		  "ORDER_TYPE" : "limit",
+		  "PRICE" : "3472.345",
+		  "INITIAL_QTY" : "0.1",
+		  "QTY" : 0,
+		  "MSG" : "User cancelled.",
+		  "NOTE" : "",
+		  "MARGIN_LEVERAGE" : "3",
+		  "EXCHANGE_TYPE" : "margin",
+		  "MARGIN_GROUP" : 0,
+		  "HIDDEN" : 1		  
+		}
+	],
+  "RESULT": 1,
+  "MESSAGE": "OK"
+}
+```
+
