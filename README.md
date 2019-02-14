@@ -360,6 +360,16 @@ TIME_IN_FORCE | No | Time when order will be auto cancelled. format "YYYY-MM-DD 
  - STOP SELL order can have price only higer than current market price.
  - CONDITIONAL orders can have any price and will be triggered once current price crosses conditional price.
 
+```javascript
+{
+ "DATA" : {
+   'ID': 1013132
+  },
+  "RESULT": 1,
+  "MESSAGE": "OK"
+}
+```
+
 
 ## Update order
 ### POST /v1/private/update_order
@@ -381,6 +391,14 @@ Parameter | Required | Description
 MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
 ID | Yes | Order ID
 
+```javascript
+{
+ "DATA" : {},
+ "RESULT": 1,
+ "MESSAGE": "OK"
+}
+```
+
 
 ## List open orders
 ### POST /v1/private/list_open_orders
@@ -389,4 +407,61 @@ Parameter | Required | Description
 ----------- | ----------- | -----------
 MARKET | No | Market ID  (ex: BTCUSD, LTCUSD ...)
 
-
+```javascript
+{
+ "DATA" : [
+    {
+      "MARKET" : "BTCUSD",
+      "ID" : 1013130,
+      "DT" : "2019-01-14 10:21:46",
+      "TYPE" : "BUY",
+      "ORDER_TYPE" : "stop",
+      "STOP_TYPE" : "market",
+      "TOTAL_QTY" : "0.1",
+      "FILLED_QTY" : "0",
+      "PENDING_QTY" : "0.1",
+      "PRICE" : "3848.25",
+      "EXCHANGE_TYPE" : "exchange",
+      "TIME_IN_FORCE" : 0,
+      "NOTE" : "",
+      "HIDDEN" : 0
+    },
+    {
+      "MARKET" : "BTCUSD",
+      "ID" : 1013131,
+      "DT" : "2019-01-14 10:21:47",
+      "TYPE" : "BUY",
+      "ORDER_TYPE" : "stop",
+      "STOP_TYPE" : "limit",
+      "STOP_LIMIT_PRICE" : "3848.25",
+      "TOTAL_QTY" : "0.1",
+      "FILLED_QTY" : "0",
+      "PENDING_QTY" : "0.1",
+      "PRICE" : "3848.25",
+      "EXCHANGE_TYPE" : "exchange",
+      "TIME_IN_FORCE" : 0,
+      "NOTE" : "",
+      "HIDDEN" : 0
+    },
+    {
+      "MARKET" : "BTCUSD",
+      "ID" : 1013132,
+      "DT" : "2019-01-14 10:21:48",
+      "TYPE" : "BUY",
+      "ORDER_TYPE" : "stop",
+      "STOP_TYPE" : "trailing",
+      "STOP_TRAILING_DISTANCE" : "36.65",
+      "TOTAL_QTY" : "0.1",
+      "FILLED_QTY" : "0",
+      "PENDING_QTY" : "0.1",
+      "PRICE" : "3701.65",
+      "EXCHANGE_TYPE" : "exchange",
+      "TIME_IN_FORCE" : "2019-01-16 09:57:16",
+      "NOTE" : "",
+      "HIDDEN" : 0
+    }
+  ],
+  "RESULT": 1,
+  "MESSAGE": "OK"
+}
+```
