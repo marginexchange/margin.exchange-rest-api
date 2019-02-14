@@ -339,7 +339,7 @@ MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
 TYPE | Yes | "BUY" or "SELL"
 ORDER_TYPE | Yes | "market" or "limit" or "stop" or "conditional"
 QTY | Yes | Order qty. General Precision Rules apply.
-PRICE | Yes | Order price. (stop/conditional trigger price stop/conditional orders) General Precision Rules apply.
+PRICE | Yes | Order price. should be "0" for market orders. (stop/conditional trigger price stop/conditional orders) General Precision Rules apply.
 EXCHANGE_TYPE | No | "exchange" or "margin". default is "exchange"
 HIDDEN | No | "1" or "0". Default is "0"
 POST_ONLY | No | "1" or "0". Default is "0". "1" = will cancel order if it is going to execute immidiately
