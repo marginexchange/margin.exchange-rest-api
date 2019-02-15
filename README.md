@@ -1,6 +1,6 @@
 # Public Rest API for **https://margin.exchange**
 
- The base endpoint is: **https://api.margin.exchange**
+The base endpoint is: **https://api.margin.exchange**
 * All requests to API return a JSON object.
 * All requests to API expects JSON object as parameters.
 * All requests to API should have HTTP status `200`
@@ -34,22 +34,22 @@ Failed:
 ```javascript
 "DATA":[
    {
-      "ID":"BTCUSD",
-      "BASE_CURRENCY":"BTC",
-      "USING_CURRENCY":"USD",
-      "BASE_CURRENCY_MIN_TRADE_SIZE":"0.00005",
-      "USING_CURRENCY_MIN_TRADE_SIZE":"0.1",
-      "CREATED":"2018-01-21 08:31:12",
-      "ENABLED":1
+      "MARKET_UID": "BTCUSD",
+      "MARKET_ID": 3,
+      "BASE_CURRENCY": "BTC",
+      "USING_CURRENCY": "USD",
+      "BASE_CURRENCY_MIN_TRADE_SIZE": "0.00005",
+      "USING_CURRENCY_MIN_TRADE_SIZE": "0.1",
+      "CREATED": "2018-01-21 08:31:12"
    },
    {
-      "ID":"ETHBTC",
-      "BASE_CURRENCY":"ETH",
-      "USING_CURRENCY":"BTC",
-      "BASE_CURRENCY_MIN_TRADE_SIZE":"0.001",
-      "USING_CURRENCY_MIN_TRADE_SIZE":"0.00005",
-      "CREATED":"2018-01-21 09:51:15",
-      "ENABLED":1
+      "MARKET_UID": "ETHBTC",
+      "MARKET_ID": 1,
+      "BASE_CURRENCY": "ETH",
+      "USING_CURRENCY": "BTC",
+      "BASE_CURRENCY_MIN_TRADE_SIZE": "0.001",
+      "USING_CURRENCY_MIN_TRADE_SIZE": "0.00005",
+      "CREATED": "2018-01-21 09:51:15"
    },
    ...
 ],
@@ -60,20 +60,19 @@ Failed:
 
 
 ## Get Market Details
-### GET /v1/public/market/`market_id`
+### GET /v1/public/market/`market_uid`
 
 ```javascript
 {
   "DATA": {
-    "ID": "BTCUSD",
+    "MARKET_UID": "BTCUSD",
+    "MARKET_ID": 3,
     "BUY": 3675,
     "SELL": 3675.3,
     "LOW": 3670.1,
     "HI": 3675.3,
     "LAST": 3675.3,
-    "VOLUME": 30856.98,
-    "ENABLED": 1,    
-    "CREATED": "2018-01-21 08:31:12"  
+    "VOLUME": 30856.98
   },
   "MESSAGE": "OK",
   "RESULT": 1
@@ -87,13 +86,15 @@ Failed:
 {
   "DATA": [
     {
-      "MARKET": "BTCUSD",
+      "MARKET_UID": "BTCUSD",
+      "MARKET_ID": 3,
       "SELL": 3678.8,      
       "BUY": 3678.5,
       "LAST": 3678.5
     },
     {
-      "MARKET": "LTCUSD",
+      "MARKET_UID": "LTCUSD",
+      "MARKET_ID": 7,
       "SELL": 43.39,
       "BUY": 43.36,
       "LAST": 43.36      
@@ -106,12 +107,13 @@ Failed:
 ```
 
 ## Get Ticker for specific market
-### GET /v1/public/ticker/`market_id`
+### GET /v1/public/ticker/`market_uid`
 
 ```javascript
 {
   "DATA": {
-    "MARKET": "BTCUSD",
+    "MARKET_UID": "BTCUSD",
+    "MARKET_ID": 3,
     "SELL": 3678.8,      
     "BUY": 3678.5,
     "LAST": 3678.5
@@ -122,7 +124,7 @@ Failed:
 ```
 
 ## Get market order book
-### GET /v1/public/orders/`market_id`
+### GET /v1/public/orders/`market_uid`
 
 **Parameters:**
 
@@ -166,7 +168,7 @@ limit | INT | NO | Default 10; max 1000.
 
 
 ## Get market order book history
-### GET /v1/public/orders_history/`market_id`
+### GET /v1/public/orders_history/`market_uid`
 
 **Parameters:**
 
@@ -244,9 +246,11 @@ while ((length(signature) % 4) != 0) {
 {
   "DATA": [
     {
-      "CURRENCY_ID": "BAB",
+      "CURRENCY_UID": "BAB",
+      "CURRENCY_ID": 2,
       "CURRENCY_TICKER": "BAB",
-      "CURRENCY_NAME": "Bitcoin ABC"
+      "CURRENCY_NAME": "Bitcoin ABC",
+      
       "MARGIN": {
         "TOTAL": 0,
         "LOCKED": 0,
@@ -267,21 +271,23 @@ while ((length(signature) % 4) != 0) {
       }
     },
     {
-      "CURRENCY_ID": "USD",
+      "CURRENCY_UID": "USD",
+      "CURRENCY_ID": 5,
       "CURRENCY_TICKER": "USD",
       "CURRENCY_NAME": "USD",
+
+      "MARGIN": {
+        "AVAIL": 0,
+        "PENDING": 0,
+        "TOTAL": 0,
+        "LOCKED": 0
+      },      
       "EXCHANGE": {
         "AVAIL": "230.6",
         "PENDING": "0",
         "TOTAL": "233",
         "LOCKED": "3.6"
       },      
-      "MARGIN": {
-        "AVAIL": 0,
-        "PENDING": 0,
-        "TOTAL": 0,
-        "LOCKED": 0
-      },
       "FUNDING": {
         "TOTAL": 0,
         "LOCKED": 0,
@@ -297,28 +303,30 @@ while ((length(signature) % 4) != 0) {
 ```
 
 ## Get Balance for specific currency
-### GET /v1/private/balance/`currency_ID`
+### GET /v1/private/balance/`currency_uid`
 
 `GET /v1/private/balance/USD`
 
 ```javascript
 {
   "DATA": {
-     "CURRENCY_ID": "USD",
+     "CURRENCY_UID": "USD",
+     "CURRENCY_ID": 5,
      "CURRENCY_TICKER": "USD",
      "CURRENCY_NAME": "USD",
-     "EXCHANGE": {
-       "AVAIL": "230.6",
-       "PENDING": "0",
-       "TOTAL": "233",
-       "LOCKED": "3.6"
-     },      
+     
      "MARGIN": {
        "AVAIL": 0,
        "PENDING": 0,
        "TOTAL": 0,
        "LOCKED": 0
      },
+     "EXCHANGE": {
+       "AVAIL": "230.6",
+       "PENDING": "0",
+       "TOTAL": "233",
+       "LOCKED": "3.6"
+     },      
      "FUNDING": {
        "TOTAL": 0,
        "LOCKED": 0,
@@ -335,7 +343,7 @@ while ((length(signature) % 4) != 0) {
 ### POST /v1/private/new_order
 Parameter | Required | Description
 ----------- | ----------- | -----------
-MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
+MARKET | Yes | Market UID  (ex: BTCUSD, LTCUSD ...)
 TYPE | Yes | "BUY" or "SELL"
 ORDER_TYPE | Yes | "market" or "limit" or "stop" or "conditional"
 QTY | Yes | Order qty. General Precision Rules apply.
@@ -383,7 +391,7 @@ Each margin order can have MARGIN_GROUP parameter to identify in what group marg
 
 Parameter | Required | Description
 ----------- | ----------- | -----------
-MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
+MARKET | Yes | Market UID  (ex: BTCUSD, LTCUSD ...)
 ID | Yes | Order ID
 QTY | Yes | Order qty. General Precision Rules apply.
 PRICE | Yes | Order price. General Precision Rules apply.
@@ -404,7 +412,7 @@ params from `new_order` except TYPE, ORDER_TYPE, STOP_TYPE and CONDITIONAL_TYPE 
 
 Parameter | Required | Description
 ----------- | ----------- | -----------
-MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
+MARKET | Yes | Market UID  (ex: BTCUSD, LTCUSD ...)
 ID | Yes | Order ID
 
 ```javascript
@@ -423,13 +431,14 @@ ID | Yes | Order ID
 
 Parameter | Required | Description
 ----------- | ----------- | -----------
-MARKET | No | Market ID  (ex: BTCUSD, LTCUSD ...)
+MARKET | No | Market UID  (ex: BTCUSD, LTCUSD ...)
 
 ```javascript
 {
  "DATA" : [
     {
-      "MARKET" : "BTCUSD",
+      "MARKET_UID" : "BTCUSD",
+      "MARKET_ID" : 3,      
       "ID" : 1013120,
       "DT" : "2019-01-11 02:23:26",
       "TYPE" : "BUY",
@@ -444,7 +453,8 @@ MARKET | No | Market ID  (ex: BTCUSD, LTCUSD ...)
       "HIDDEN" : 1
     },
     {
-      "MARKET" : "BTCUSD",
+      "MARKET_UID" : "BTCUSD",
+      "MARKET_ID" : 3,   
       "ID" : 1013130,
       "DT" : "2019-01-14 10:21:46",
       "TYPE" : "BUY",
@@ -460,7 +470,8 @@ MARKET | No | Market ID  (ex: BTCUSD, LTCUSD ...)
       "HIDDEN" : 0
     },
     {
-      "MARKET" : "BTCUSD",
+      "MARKET_UID" : "BTCUSD",
+      "MARKET_ID" : 3,   
       "ID" : 1013131,
       "DT" : "2019-01-14 10:21:47",
       "TYPE" : "BUY",
@@ -477,7 +488,8 @@ MARKET | No | Market ID  (ex: BTCUSD, LTCUSD ...)
       "HIDDEN" : 0
     },
     {
-      "MARKET" : "BTCUSD",
+      "MARKET_UID" : "BTCUSD",
+      "MARKET_ID" : 3,   
       "ID" : 1013132,
       "DT" : "2019-01-14 10:21:48",
       "TYPE" : "BUY",
@@ -504,7 +516,7 @@ MARKET | No | Market ID  (ex: BTCUSD, LTCUSD ...)
 
 Parameter | Required | Description
 ----------- | ----------- | -----------
-MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
+MARKET | Yes | Market UID  (ex: BTCUSD, LTCUSD ...)
 LIMIT | No | Number of orders to return (sorted by execution/cancellation time DESC). Default is 10. Max 100
 
 
@@ -512,7 +524,8 @@ LIMIT | No | Number of orders to return (sorted by execution/cancellation time D
 {
 	"DATA": [
 		{
-		  "MARKET" : "BTCUSD",
+      "MARKET_UID" : "BTCUSD",
+      "MARKET_ID" : 3,
 		  "ID" : 1014324,
 		  "DT" : "2019-02-14 11:39:33",
 		  "END_DT" : "2019-02-14 11:39:33",
@@ -529,7 +542,8 @@ LIMIT | No | Number of orders to return (sorted by execution/cancellation time D
 		  "HIDDEN" : 0
 		},
 		{
-		  "MARKET" : "BTCUSD",
+      "MARKET_UID" : "BTCUSD",
+      "MARKET_ID" : 3,
 		  "ID" : 1014231,
 		  "DT" : "2019-02-14 11:39:06",
 		  "END_DT" : "2019-02-14 11:39:28",
@@ -556,14 +570,15 @@ LIMIT | No | Number of orders to return (sorted by execution/cancellation time D
 
 Parameter | Required | Description
 ----------- | ----------- | -----------
-MARKET | No | Market ID  (ex: BTCUSD, LTCUSD ...)
+MARKET | No | Market UID  (ex: BTCUSD, LTCUSD ...)
 
 ```javascript
 {
 	"DATA": [
 	  {
-	    "MARKET": "BTCUSD",
-	    "ID": 3,
+      "MARKET_UID" : "BTCUSD",
+      "MARKET_ID" : 3,
+	    "ID": 3234,
 	    "DT": "2019-02-14 12:10:30",
 	    "TYPE": "BUY",
 	    "QTY": "0.1",
@@ -587,7 +602,7 @@ MARKET | No | Market ID  (ex: BTCUSD, LTCUSD ...)
 
 Parameter | Required | Description
 ----------- | ----------- | -----------
-MARKET | Yes | Market ID  (ex: BTCUSD, LTCUSD ...)
+MARKET | Yes | Market UID  (ex: BTCUSD, LTCUSD ...)
 ID | Yes | Position ID
 
 This action is same as manually make an `opposite market order with same qty`.
@@ -595,8 +610,8 @@ This action is same as manually make an `opposite market order with same qty`.
 ```javascript
 {
   "DATA": {
-    "POSITION_ID": 3,
-    "CLOSE_ORDER_ID": 1025583    
+    "POSITION_ID": 3234,
+    "CLOSE_ORDER_ID": 1025583
   },
   "MESSAGE": "Order Submitted",
   "RESULT": 1
