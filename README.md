@@ -176,7 +176,7 @@ Name | Type | Mandatory | Description
 ------------ | ------------ | ------------ | ------------
 limit | INT | NO | Default 10; max 100.
 
-`GET /v1/public/orders_hisotry/BTCUSD?limit=2`
+`GET /v1/public/orders_history/BTCUSD?limit=2`
 ```javascript
 {
   "DATA": [
@@ -524,8 +524,8 @@ LIMIT | No | Number of orders to return (sorted by execution/cancellation time D
 {
 	"DATA": [
 		{
-      "MARKET_UID" : "BTCUSD",
-      "MARKET_ID" : 3,
+		  "MARKET_UID" : "BTCUSD",
+		  "MARKET_ID" : 3,
 		  "ID" : 1014324,
 		  "DT" : "2019-02-14 11:39:33",
 		  "END_DT" : "2019-02-14 11:39:33",
@@ -542,8 +542,8 @@ LIMIT | No | Number of orders to return (sorted by execution/cancellation time D
 		  "HIDDEN" : 0
 		},
 		{
-      "MARKET_UID" : "BTCUSD",
-      "MARKET_ID" : 3,
+		  "MARKET_UID" : "BTCUSD",
+		  "MARKET_ID" : 3,
 		  "ID" : 1014231,
 		  "DT" : "2019-02-14 11:39:06",
 		  "END_DT" : "2019-02-14 11:39:28",
@@ -576,8 +576,8 @@ MARKET | No | Market UID  (ex: BTCUSD, LTCUSD ...)
 {
 	"DATA": [
 	  {
-      "MARKET_UID" : "BTCUSD",
-      "MARKET_ID" : 3,
+	    "MARKET_UID" : "BTCUSD",
+	    "MARKET_ID" : 3,
 	    "ID": 3234,
 	    "DT": "2019-02-14 12:10:30",
 	    "TYPE": "BUY",
