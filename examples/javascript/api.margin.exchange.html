@@ -1,0 +1,343 @@
+<html>
+	
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<title>https://Margin.exchange API test example</title>
+		
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	</head>
+	
+	
+	<body>
+		<b>
+		This script requires CryptoJS library to make auth requests.<br>
+		Check source code (or error console) to be sure scripts is still availbale on CDN.<br>
+		</b>
+		<br><br>
+		
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/hmac-sha256.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/enc-base64-min.js"></script>
+	
+	
+		<div >
+			
+			<table style="width: 100%;">
+				<tr>
+					<td style="width: 30%;">Api key: </td>
+					<td><input style="width: 300px;" type="text" id="API_REQUEST_API_KEY" value=""></td>
+				</tr>
+				
+				<tr>
+					<td>Api secret: </td>
+					<td><input style="width: 300px;" type="text" id="API_REQUEST_API_SECRET" value=""></td>
+				</tr>
+				
+				<tr>
+					<td>Api nonce: </td>
+					<td><input style="width: 300px;" type="text" id="API_REQUEST_API_NONCE" value="" placeholder="empty for unix time"></td>
+				</tr>
+				
+				<tr>
+					<td>Api Domain: </td>
+					<td>
+						<input style="width: 300px;" type="text" id="API_REQUEST_API_DOMAIN" value="https://api.margin.exchange">
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Api Request URL: </td>
+					<td><input style="width: 300px;" type="text" id="API_REQUEST_API_REQUEST_URL" value="/v1/public/markets"></td>
+				</tr>
+				
+				<tr>
+					<td style="color: red;">Load predefined: </td>
+					<td>
+						<select style="width: 300px; font-size: 20px;" id="API_call_samples" onchange="PasteAPIRequestSampleData(this.value)">
+							<option value="">Select</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Api Request BODY: </td>
+				</tr>
+				
+				<tr>
+					<td colspan=2>
+						<textarea style="width: 500px; height: 200px;" type="text" id="API_REQUEST_API_REQUEST_DATA">{}</textarea>
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan=2>
+						<button onclick="Api_Request_Send(event)">Send</button>
+					</td>						
+				</tr>
+			</table>
+			
+			<pre id="API_REQUEST_REPLY">
+				
+			</pre>
+		</div>
+		
+		
+		
+<script>
+
+	var api_samples = {
+		'List markets': {
+			url : '/v1/public/markets',
+			data: ''
+		},
+		
+		'Get BTCUSD market': {
+			url : '/v1/public/market/BTCUSD',
+			data: ''
+		},
+		
+		'List tickers': {
+			url : '/v1/public/tickers',
+			data: ''
+		},
+		
+		'Get BTCUSD ticker': {
+			url : '/v1/public/ticker/BTCUSD',
+			data: ''
+		},
+		
+		
+		'Get order book for BTCUSD': {
+			url : '/v1/public/orders/BTCUSD?limit=10',
+			data: ''
+		},
+		
+		
+		'Get order book history for BTCUSD': {
+			url : '/v1/public/orders_history/BTCUSD?limit=20',
+			data: ''
+		},
+		
+		
+		
+		'balances': {
+			url : '/v1/private/balances',
+			data: '{}'
+		},
+		
+		'balance BTC': {
+			url : '/v1/private/balance/BTC/',
+			data: '{}'
+		},
+		
+		'new_order: buy limit': {
+			url : '/v1/private/new_order',
+			data: `
+{ 
+	"MARKET": "BTCUSD",
+	"TYPE": "BUY",
+	"QTY": "0.1",
+	"PRICE": "1000",
+	"ORDER_TYPE": "limit"
+}
+			`
+		},
+		
+		
+		'new_order: sell market': {
+			url : '/v1/private/new_order',
+			data: `
+{ 
+	"MARKET": "BTCUSD",
+	"TYPE": "SELL",
+	"QTY": "0.1",
+	"PRICE": "0",
+	"ORDER_TYPE": "market"
+}
+			`
+		},
+		
+		
+		'new_order: STOP sell market': {
+			url : '/v1/private/new_order',
+			data: `
+{ 
+	"MARKET": "BTCUSD",
+	"TYPE": "SELL",
+	"QTY": "0.1",
+	"PRICE": "6000",
+	"ORDER_TYPE": "stop",
+	"STOP_TYPE": "market"
+}
+			`
+		},
+		
+		
+		'new_order: STOP buy limit': {
+			url : '/v1/private/new_order',
+			data: `
+{ 
+	"MARKET": "BTCUSD",
+	"TYPE": "BUY",
+	"QTY": "0.1",
+	"PRICE": "6000",
+	"ORDER_TYPE": "stop",
+	"STOP_TYPE": "limit",
+	"STOP_LIMIT_PRICE": "6000",
+}
+			`
+		},
+		
+		
+		'new_order: STOP buy trailing': {
+			url : '/v1/private/new_order',
+			data: `
+{ 
+	"MARKET": "BTCUSD",
+	"TYPE": "BUY",
+	"QTY": "0.1",
+	"PRICE": "6000",
+	"ORDER_TYPE": "stop",
+	"STOP_TYPE": "trailing",
+	"STOP_PRICE_DISTANCE": "25",
+}
+			`
+		},
+		
+		
+		'new_order: Margin market buy 3x Leverage': {
+			url : '/v1/private/new_order',
+			data: `
+{ 
+	"MARKET": "BTCUSD",
+	"TYPE": "BUY",
+	"QTY": "0.1",
+	"PRICE": "6000",
+	"ORDER_TYPE": "market",
+	"EXCHANGE_TYPE": "margin",
+	"MARGIN_LEVERAGE": 3,
+	"MARGIN_GROUP": 0
+}
+			`
+		},
+		
+		
+		'cancel_order': {
+			url : '/v1/private/cancel_order',
+			data: `
+{ 
+	"MARKET": "BTCUSD",
+	"ID": "111111"
+}
+			`
+		},
+		
+		
+		'list_open_orders': {
+			url : '/v1/private/list_open_orders',
+			data: '{}'
+		},
+		
+		
+		'list_open_orders BTCUSD': {
+			url : '/v1/private/list_open_orders',
+			data: '{"MARKET":"BTCUSD"}'
+		},
+		
+
+		'list_margin_positions': {
+			url : '/v1/private/list_margin_positions',
+			data: '{}'
+		},
+	};
+	
+	
+		
+	
+	function PasteAPIRequestSampleData (ex) {
+		if (ex == '') return;
+		
+		$('#API_REQUEST_API_REQUEST_DATA').val(api_samples[ex].data);
+		$('#API_REQUEST_API_REQUEST_URL').val(api_samples[ex].url)
+	};
+	
+
+	function Api_Request_Send () {
+		var url = $('#API_REQUEST_API_REQUEST_URL').val();
+		
+		if (url.match(/private/)) {
+			if (($('#API_REQUEST_API_KEY').val() == '') || ($('#API_REQUEST_API_SECRET').val() == '')) {
+				alert("Private requests require API KEY / API SECRET");
+				//return;  //no return, send request. lets see error
+			};
+		};
+		
+		$('#API_REQUEST_REPLY').html('Loading...');
+		
+		
+		var send_data = '';
+		
+		if ($('#API_REQUEST_API_REQUEST_DATA').val() != '') {
+			try {
+				var json = JSON.parse($('#API_REQUEST_API_REQUEST_DATA').val());
+			} catch (e) {
+				alert('Invalid submit POST data. should be valid JSON');
+			};
+			
+			send_data = JSON.stringify(json);
+		};
+		
+		
+		var nonce = $('#API_REQUEST_API_NONCE').val() ? $('#API_REQUEST_API_NONCE').val() : Math.round(Date.now() / 1000);
+		var payload_str = 'POST' + url + send_data + nonce;
+		var payload = window.btoa(payload_str);	
+		var signature = CryptoJS.enc.Base64.stringify(CryptoJS.HmacSHA256(payload, $('#API_REQUEST_API_SECRET').val()));
+
+		
+		$.ajax({
+			type: 'POST',
+			url: $('#API_REQUEST_API_DOMAIN').val() + $('#API_REQUEST_API_REQUEST_URL').val(),
+			
+			data: send_data,
+			crossDomain: true,
+			global: false,
+			timeout: 10000,
+			
+			async: true,
+			cache: false,
+			headers: {
+				"X-APIKEY" : $('#API_REQUEST_API_KEY').val(),
+				"X-PAYLOAD" : payload,
+				"X-SIGNATURE" : signature,
+				"X-NONCE" : nonce
+			}
+		})
+		.done(
+			function (in_data) {
+				$('#API_REQUEST_REPLY').html(JSON.stringify(in_data, null, 2));
+			})
+		.fail(
+			function (req, text_status, text_err) {
+				$('#API_REQUEST_REPLY').html('Error: ' + text_err);
+			});
+	};
+	
+
+	$(document).ready(function() {
+		var s = $('#API_call_samples');
+		
+		for (var el in api_samples) {
+			var op = new Option;
+			op.text = el;
+			op.value = el;
+			s[0].add(op);
+		};
+		
+	});
+</script>
+		
+				
+	</body>
+</html>
