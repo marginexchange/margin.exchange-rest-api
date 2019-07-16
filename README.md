@@ -655,8 +655,7 @@ SHIPPING_CITY | No |
 SHIPPING_STATE_PROVINCE | No |
 SHIPPING_ZIP | No |
 SHIPPING_PHONE | No |
-PRODUCT_COUNT | YES | Number of products in invoice. Should be > 0.
-
+**PRODUCT_COUNT** | YES | Number of products in invoice. Should be > 0.
 PRODUCT_1_SKU | No | Product 1 SKU
 PRODUCT_1_DESCR | Yes | Product 1 name (title)
 PRODUCT_1_PRICE | Yes | Product 1 price
@@ -665,12 +664,11 @@ PRODUCT_1_UNITS | No | Product 1 measure units. (ex : pcs, meters, box)
 PRODUCT_1_DISCOUNT_PERCENT | Yes | Product 1 discount %.
 PRODUCT_1_DISCOUNT_VALUE | Yes | Product 1 discount value.
 PRODUCT_1_URL | No | Product 1 link to description page. should start with 'http'
-
-... up to PRODUCT_COUNT ...
-
+... up to PRODUCT_COUNT ... ||
 PRODUCT_X_SKU | No | Product X SKU
 PRODUCT_X_DESCR | Yes | Product X name (title)
-...
+...||
+
 
 ```javascript
 {
