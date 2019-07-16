@@ -223,9 +223,9 @@ Lets make request to (as example): `/v1/private/cancel_order`
 
 PAYLOAD:
 ```
-payload = "POST" + "/v1/private/cancel_order" + "{"MARKET":"BTCUSD","ID":12333}" + "12233342344"
+payload = "POST" + '/v1/private/cancel_order' + '{"MARKET":"BTCUSD","ID":12333}' + '12233342344'
 payload = encode_base64(payload)
-````
+```
 
 SIGNATURE:
 ```
@@ -618,3 +618,67 @@ This action is same as manually make an `opposite market order with same qty`.
 }
 ```
 
+# MERCHANT API Requests
+## Make new invoice
+### POST /v1/private/merchant_new_invoice
+
+Parameter | Required | Description
+----------- | ----------- | -----------
+MERCHANT_ID | Yes | Your Merchant ID
+SITE_ID | Yes | Your Site ID
+CURRENCY_UID | Yes | Requested currency UID (ex: USD or BTC)
+AMOUNT | Yes | Invoice amount for products only. (w/o tax, shipping, etc)
+TOTAL_AMOUNT | Yes | Total invoice amount. (products + tax + shipping)
+TAX_PERCENT | Yes | Tax percent
+TAX_AMOUNT | Yes | Total tax amount for invoice
+SHIPPING_AMOUNT | Yes | Shipping amount
+INVOICE_EMAIL | Yes | Invoice recipient
+ORDER_ID | No | Order Id. max 255 chars
+ORDER_DESCRIPTION | No | Order description. max 1024 chars
+BILLING_FIRST_NAME | No |
+BILLING_LAST_NAME | No |
+BILLING_ADDRESS1 | No |
+BILLING_ADDRESS2 | No |
+BILLING_EMAIL | No |
+BILLING_COUNTRY | No |
+BILLING_CITY | No |
+BILLING_STATE_PROVINCE | No |
+BILLING_ZIP | No |
+BILLING_PHONE | No |
+SHIPPING_FIRST_NAME | No |
+SHIPPING_LAST_NAME | No |
+SHIPPING_ADDRESS1 | No |
+SHIPPING_ADDRESS2 | No |
+SHIPPING_EMAIL | No |
+SHIPPING_COUNTRY | No |
+SHIPPING_CITY | No |
+SHIPPING_STATE_PROVINCE | No |
+SHIPPING_ZIP | No |
+SHIPPING_PHONE | No |
+PRODUCT_COUNT | YES | Number of products in invoice. Should be > 0.
+
+PRODUCT_1_SKU | No | Product 1 SKU
+PRODUCT_1_DESCR | Yes | Product 1 name (title)
+PRODUCT_1_PRICE | Yes | Product 1 price
+PRODUCT_1_QTY | Yes | Product 1 qty. float > 0.
+PRODUCT_1_UNITS | No | Product 1 measure units. (ex : pcs, meters, box)
+PRODUCT_1_DISCOUNT_PERCENT | Yes | Product 1 discount %.
+PRODUCT_1_DISCOUNT_VALUE | Yes | Product 1 discount value.
+PRODUCT_1_URL | No | Product 1 link to description page. should start with 'http'
+
+... up to PRODUCT_COUNT ...
+
+PRODUCT_X_SKU | No | Product X SKU
+PRODUCT_X_DESCR | Yes | Product X name (title)
+...
+
+```javascript
+{
+  "DATA": {
+    "ID": 3234,
+    "URL": 'http://domain.com/....'
+  },
+  "MESSAGE": "Ok",
+  "RESULT": 1
+}
+```
