@@ -610,7 +610,7 @@ This action is same as manually make an `opposite market order with same qty`.
 ```javascript
 {
   "DATA": {
-    "POSITION_ID": 3234,
+    "MA_ID": 3234,
     "CLOSE_ORDER_ID": 1025583
   },
   "MESSAGE": "Order Submitted",
@@ -674,7 +674,8 @@ PRODUCT_X_DESCR | Yes | Product X name (title)
 {
   "DATA": {
     "ID": 3234,
-    "URL": 'http://domain.com/....'
+    "UID": "....",
+    "URL": "http://domain.com/...."
   },
   "MESSAGE": "Ok",
   "RESULT": 1
